@@ -1,6 +1,6 @@
 <?php
 
-DEFINE('DB_USER', 'daicrafting');
+DEFINE('DB_USER', 'globesearch');
 DEFINE('DB_PASSWORD', 'turtledove');
 DEFINE('DB_HOST', 'localhost');
 DEFINE('DB_NAME', 'goldenglobes');

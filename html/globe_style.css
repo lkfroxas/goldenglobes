@@ -171,6 +171,11 @@ a:active {
 #nt td:first-child {
 	width: 20%;
 }
+
+.default-invisible {
+	display: none;
+}
+
 /* Footer */
 
 footer {
