@@ -5,7 +5,7 @@ Lowell Roxas
 Alexander Winchester
 Shinya Yamamoto
 
-VERSION: 1.0 [Project submission for ASU SER 322]
+VERSION: 1.1 [Project submission for ASU SER 322]
 
 DESCRIPTION: A web page that performs searches on a database containing data for Golden Globe winners from 2015-2017.
 
@@ -20,3 +20,7 @@ Instructions:
 2. Load db/globe_data.php into MySQL.
 3. Start the web server on localhost.
 6. Start a web browser and navigate to: localhost:[portnumber]:/index.php
+
+CHANGELOG:
+
+1.1 - Implemented AJAX requests for all searches.
