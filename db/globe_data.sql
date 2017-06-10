@@ -3,20 +3,20 @@ CREATE DATABASE goldenglobes;
 USE goldenglobes;
 
 CREATE TABLE person (
-	personid INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,	-- Unique ID for Person
+	personid SMALLINT NOT NULL IDENTITY PRIMARY KEY,	-- Unique ID for Person
 	name VARCHAR(150) NOT NULL,									-- Name of Person
 	gender CHAR(1) NOT NULL										-- Gender of Person: 'm'ale, 'f'emale
 );
 
 CREATE TABLE production (
-	prodid INT unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,	-- Unique ID for the Production
+	prodid SMALLINT NOT NULL IDENTITY PRIMARY KEY,	-- Unique ID for the Production
 	title VARCHAR(150) NOT NULL,								-- Title of Production
 	genre CHAR(1) NOT NULL,										-- Genre of Production: 'd'rama, 'c'omedy or musical, 'a'nimation
 	type CHAR (1) NOT NULL										-- Type of Production: 'm'otion picture, 't'elevision
 );
 
 CREATE TABLE award (
-	globeid INT unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY, 	-- Unique ID for the Award
+	globeid SMALLINT NOT NULL IDENTITY PRIMARY KEY, 	-- Unique ID for the Award
 	name VARCHAR(150) NOT NULL,									-- Name of the award
 	genre CHAR(1) NOT NULL,										-- Genre of Production: 'd'rama, 'c'omedy or musical, 'n'one
 	type CHAR (1) NOT NULL,										-- Type of Production: 'm'otion picture, 't'elevision
@@ -24,11 +24,11 @@ CREATE TABLE award (
 );
 
 CREATE TABLE winner (
-	nomid INT unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,		-- Unique ID for Nominee
-	year INT unsigned NOT NULL,									-- Year of nomination
-	globeid INT unsigned NOT NULL,								-- referenced award(globeid)
-	personid INT unsigned, 										-- referenced person(personid) if award(recipient) = i
-	prodid INT unsigned, 										-- referenced production(prodid) if award(recipient) = p
+	nomid SMALLINT NOT NULL IDENTITY PRIMARY KEY,		-- Unique ID for Nominee
+	year INT NOT NULL,									-- Year of nomination
+	globeid INT NOT NULL,								-- referenced award(globeid)
+	personid INT, 										-- referenced person(personid) if award(recipient) = i
+	prodid INT, 										-- referenced production(prodid) if award(recipient) = p
 	role VARCHAR(150), 											-- role of nominee if award(recipient) = i; 'a'ctor, 'd'irector
 	song VARCHAR(150)											-- Title of song if award(name) = best song
 );
@@ -248,6 +248,9 @@ INSERT INTO winner(year, globeid, personid, prodid, role, song)
 		(2015,25,49,47,'a',NULL), 
 		(2015,26,50,NULL,'a',NULL);
 
-GRANT SELECT ON goldenglobes.*
-TO 'globesearch'@'localhost'
-IDENTIFIED BY 'turtledove';
+DROP USER IF EXISTS globesearch;
+CREATE LOGIN globesearch WITH PASSWORD = 'Turtledove1';
+CREATE USER globesearch;
+
+GRANT SELECT ON DATABASE::goldenglobes
+TO globesearch;
